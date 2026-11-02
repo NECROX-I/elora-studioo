@@ -4,7 +4,7 @@ export const SITE = {
   email: "contact.elorastudio@gmail.com",
   location: "Kolkata, West Bengal, India",
   availability: "Remote projects, by email",
-  mapQuery: "Kolkata,West Bengal,India",
+  mapQuery: "Kolkata, India",
 };
 export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${SITE.email}`;
 export const NAV = [

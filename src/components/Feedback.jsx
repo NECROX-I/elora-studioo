@@ -44,6 +44,7 @@ export default function Feedback() {
           onTouchStart={(e) => { x0.current = e.touches[0].clientX; setPaused(true); }}
           onTouchEnd={onTouchEnd}
         >
+          <SectionHead title="Coming Soon" />
           <div className="car__vp">
             <div className="car__tr" style={{ transform: `translateX(-${cur * 100}%)` }}>
               {FEEDBACK.map((f, i) => (

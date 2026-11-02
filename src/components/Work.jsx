@@ -6,6 +6,7 @@ export default function Work() {
     <section className="sec alt" id="work">
       <div className="wrap">
         <SectionHead eyebrow="Selected Work" title="Portfolio & experience" text="Case studies are being added as projects are delivered. Each tile below becomes a real project." />
+        <SectionHead title="Coming Soon" />
         <div className="grid g3">
           {WORKS.map((w, i) => (
             <Reveal key={w.title} as={w.href ? "a" : "div"} className="work" {...(w.href ? { href: w.href, target: "_blank", rel: "noopener" } : {})}>
