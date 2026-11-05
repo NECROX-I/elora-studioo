@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { FORM_ENDPOINT, SITE } from "../config/site";
 import Reveal from "./Reveal";
+
 const SERVICE_OPTIONS = ["Creative Design", "Video Editing", "PowerPoint Presentation", "Excel Solutions", "Website Development", "Other"];
+
 export default function Contact() {
   const [state, setState] = useState({ type: "", msg: "" });
   const [busy, setBusy] = useState(false);
+
   async function submit(e) {
     e.preventDefault();
     const form = e.currentTarget, d = new FormData(form);
@@ -13,13 +16,20 @@ export default function Contact() {
     setBusy(true); setState({ type: "", msg: "Sending…" });
     try {
       const r = await fetch(FORM_ENDPOINT, { method: "POST", headers: { Accept: "application/json" }, body: d });
-      if (!r.ok) throw new Error("send failed");
-      form.reset(); setState({ type: "ok", msg: "Thank you — we'll reply by email shortly." });
-    } catch {
+      if (!r.ok) {
+        const data = await r.json().catch(() => ({}));
+        console.error("Form error:", r.status, data);
+        throw new Error("send failed");
+      }
+      form.reset();
+      setState({ type: "ok", msg: "Thank you — we'll reply by email shortly." });
+    } catch (err) {
+      console.error(err);
       setState({ type: "err", msg: `Couldn't send. Please email ${SITE.email}.` });
     }
     setBusy(false);
   }
+
   return (
     <section className="sec contact" id="contact">
       <div className="wrap two">
@@ -35,7 +45,7 @@ export default function Contact() {
           <div className="map"><iframe title={`Studio location, ${SITE.location}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" src={`https://www.google.com/maps?q=${encodeURIComponent(SITE.mapQuery)}&output=embed`} /></div>
         </Reveal>
         <Reveal as="form" className="form" noValidate onSubmit={submit}>
-          <input type="text" name="_honey" tabIndex="-1" autoComplete="off" className="hp" />
+          <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" className="hp" />
           <input type="hidden" name="_subject" value="New ELORA Studio enquiry" />
           <label>Name<input name="name" required autoComplete="name" /></label>
           <label>Email<input name="email" type="email" required autoComplete="email" /></label>

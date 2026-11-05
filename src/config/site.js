@@ -6,7 +6,7 @@ export const SITE = {
   availability: "Remote projects, by email",
   mapQuery: "Kolkata, India",
 };
-export const FORM_ENDPOINT = `https://formsubmit.co/ajax/${SITE.email}`;
+export const FORM_ENDPOINT = `https://formspree.io/f/mpppbkvn`;
 export const NAV = [
   { id: "about", label: "About" },
   { id: "services", label: "Services" },
