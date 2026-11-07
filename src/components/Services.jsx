@@ -37,7 +37,7 @@ export default function Services() {
       <div className="wrap">
         <SectionHead
           eyebrow="What We Do"
-          title="Services We Provide For YouI"
+          title="Services We Provide For You"
         />
         <div className="grid g3">
           {SERVICES.map((s) => {

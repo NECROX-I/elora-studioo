@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-label="Placeholder screenshot">
+  <defs>
+    <radialGradient id="a" cx="30%" cy="20%" r="60%"><stop offset="0" stop-color="#6b2fb3" stop-opacity=".45"/><stop offset="1" stop-color="#6b2fb3" stop-opacity="0"/></radialGradient>
+    <radialGradient id="b" cx="80%" cy="90%" r="55%"><stop offset="0" stop-color="#d9a95a" stop-opacity=".25"/><stop offset="1" stop-color="#d9a95a" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="#0d0d12"/>
+  <rect width="1600" height="1000" fill="url(#a)"/>
+  <rect width="1600" height="1000" fill="url(#b)"/>
+  <rect x="40" y="40" width="1520" height="920" rx="24" fill="none" stroke="#d9a95a" stroke-opacity=".25" stroke-dasharray="10 10"/>
+  <text x="800" y="500" text-anchor="middle" font-family="Georgia, serif" font-size="56" fill="#d9a95a" fill-opacity=".8">Replace with project screenshot</text>
+  <text x="800" y="568" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" fill="#a39e94">public/projects/placeholder.svg</text>
+</svg>

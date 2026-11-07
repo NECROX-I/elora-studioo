@@ -41,6 +41,7 @@ export default function Contact() {
             <li><span>Email</span><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
             <li><span>Location</span>{SITE.location}</li>
             <li><span>Availability</span>{SITE.availability}</li>
+            {SITE.replyTime && <li><span>Response</span>{SITE.replyTime}</li>}
           </ul>
           <div className="map"><iframe title={`Studio location, ${SITE.location}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" src={`https://www.google.com/maps?q=${encodeURIComponent(SITE.mapQuery)}&output=embed`} /></div>
         </Reveal>
@@ -52,6 +53,7 @@ export default function Contact() {
           <label>Service<select name="service">{SERVICE_OPTIONS.map((s) => <option key={s}>{s}</option>)}</select></label>
           <label>Project details<textarea name="message" rows="5" required /></label>
           <button className="btn full" type="submit" disabled={busy}>Send Message</button>
+          <p className="note">We only use your details to reply to your enquiry.</p>
           <p id="status" role="status" className={state.type}>{state.msg}</p>
         </Reveal>
       </div>

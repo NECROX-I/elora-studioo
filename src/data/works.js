@@ -1,70 +1,29 @@
+// Single source of truth for the portfolio.
+// The homepage cards AND the /work/<slug> pages are both generated from this array.
+// While the array is empty, the Work section and its menu link are hidden automatically.
+// To add a project: copy the template below INTO the array, remove the "//" marks, and fill in REAL details.
+// Never add a project, client, result or testimonial that isn't real.
+// Images go in public/projects/<slug>/ and are written WITHOUT "public" in the path.
+// To preview the layout before you have real images, use "/projects/placeholder.svg"
+// for image and screenshots, then replace it.
+
 export const WORKS = [
   // {
-  //   id: 1,
-  //   slug: "project-one", // becomes the URL: /work/project-one
-  //   kind: "personal",
-  //   placeholder: true, // REPLACE: delete this line (or set false) once the project is real
-  //   title: "Project One", // REPLACE
-  //   category: "Website Development", // REPLACE with the matching service
-  //   type: "Personal Project",
-  //   shortDescription:
-  //     "REPLACE: one or two sentences about what this project is.", // shown on the homepage
-  //   overview:
-  //     "REPLACE: a short paragraph about the project, its purpose and what you built.", // shown on the project page
-  //   technologies: [
-  //     "REPLACE: Technology 1",
-  //     "REPLACE: Technology 2",
-  //     "REPLACE: Technology 3",
+  //   id: 1, // unique number
+  //   slug: "my-project", // URL becomes /work/my-project (lowercase, hyphens, no spaces)
+  //   kind: "personal", // "personal" = Personal Projects, "client" = Client Projects
+  //   title: "My Project",
+  //   category: "Website Development", // one of your services
+  //   type: "Personal Project", // use "Client Project" when kind is "client"
+  //   shortDescription: "One or two sentences.", // shown on the homepage card
+  //   overview: "A short paragraph about the project and what you built.", // shown on the project page
+  //   technologies: ["React", "Vite"],
+  //   features: ["A real feature", "Another real feature"],
+  //   image: "/projects/my-project/cover.webp", // homepage card image (16:10, about 1600x1000)
+  //   screenshots: [
+  //     "/projects/my-project/01.webp",
+  //     "/projects/my-project/02.webp",
   //   ],
-  //   features: [
-  //     "REPLACE: Feature 1",
-  //     "REPLACE: Feature 2",
-  //     "REPLACE: Feature 3",
-  //   ],
-  //   image: PLACEHOLDER, // REPLACE: cover image, e.g. "/projects/project-one/cover.webp" (16:10, ~1600x1000)
-  //   screenshots: [PLACEHOLDER, PLACEHOLDER], // REPLACE: e.g. ["/projects/project-one/01.webp", "/projects/project-one/02.webp"]
-  // },
-  // {
-  //   id: 2,
-  //   slug: "project-two",
-  //   kind: "personal",
-  //   placeholder: true,
-  //   title: "Project Two", // REPLACE
-  //   category: "Creative Design", // REPLACE
-  //   type: "Personal Project",
-  //   shortDescription:
-  //     "REPLACE: one or two sentences about what this project is.",
-  //   overview:
-  //     "REPLACE: a short paragraph about the project, its purpose and what you built.",
-  //   technologies: ["REPLACE: Tool 1", "REPLACE: Tool 2", "REPLACE: Tool 3"],
-  //   features: [
-  //     "REPLACE: Feature 1",
-  //     "REPLACE: Feature 2",
-  //     "REPLACE: Feature 3",
-  //   ],
-  //   image: PLACEHOLDER, // REPLACE: "/projects/project-two/cover.webp"
-  //   screenshots: [PLACEHOLDER, PLACEHOLDER], // REPLACE
-  // },
-  // {
-  //   id: 3,
-  //   slug: "project-three",
-  //   kind: "personal",
-  //   placeholder: true,
-  //   title: "Project Three", // REPLACE
-  //   category: "Excel Solutions", // REPLACE
-  //   type: "Personal Project",
-  //   shortDescription:
-  //     "REPLACE: one or two sentences about what this project is.",
-  //   overview:
-  //     "REPLACE: a short paragraph about the project, its purpose and what you built.",
-  //   technologies: ["REPLACE: Tool 1", "REPLACE: Tool 2", "REPLACE: Tool 3"],
-  //   features: [
-  //     "REPLACE: Feature 1",
-  //     "REPLACE: Feature 2",
-  //     "REPLACE: Feature 3",
-  //   ],
-  //   image: PLACEHOLDER, // REPLACE: "/projects/project-three/cover.webp"
-  //   screenshots: [PLACEHOLDER, PLACEHOLDER], // REPLACE
   // },
 ];
 

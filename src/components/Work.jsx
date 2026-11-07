@@ -21,6 +21,7 @@ const GROUPS = [
 ];
 
 export default function Work() {
+  if (WORKS.length === 0) return null;
   return (
     <section className="sec alt" id="work">
       <div className="wrap">

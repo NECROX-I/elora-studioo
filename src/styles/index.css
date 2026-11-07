@@ -1553,3 +1553,35 @@ h2 {
 .proj__img {
     aspect-ratio: 16/9;
 }
+
+
+/* ===== Footer links & contact privacy note ===== */
+.foot__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px 22px;
+    margin: 6px 0 2px;
+}
+.foot__links a {
+    padding: 6px 0;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mu);
+    transition: color 0.2s;
+}
+.foot p a {
+    color: inherit;
+    transition: color 0.2s;
+}
+.foot__links a:hover,
+.foot p a:hover {
+    color: var(--gl);
+}
+.form .note {
+    margin: 12px 0 0;
+    font-size: 0.78rem;
+    color: var(--mu);
+    text-align: center;
+}

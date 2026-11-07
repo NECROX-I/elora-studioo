@@ -8,14 +8,21 @@ window.addEventListener("pagehide", () =>
   window.history.replaceState({ y: window.scrollY }, ""),
 );
 
+const clean = (p) => p.replace(/\/+$/, "") || "/";
+
 // Go to an internal URL without a full page reload.
 export function navigate(to) {
+  const url = new URL(to, window.location.href);
+  if (clean(url.pathname) === clean(window.location.pathname)) {
+    // Same page: just scroll to the section (or to the top).
+    if (url.hash) window.location.hash = url.hash;
+    else window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
   window.history.replaceState({ y: window.scrollY }, ""); // remember where we were (for Back)
   window.history.pushState(null, "", to);
   window.dispatchEvent(new PopStateEvent("popstate"));
 }
-
-const clean = (p) => p.replace(/\/+$/, "") || "/";
 
 // Returns the current pathname, e.g. "/" or "/work/project-one".
 export default function usePath() {
