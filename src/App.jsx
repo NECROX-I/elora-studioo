@@ -11,13 +11,15 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
 import ProjectPage from "./components/ProjectPage";
+import ImageViewer from "./components/ImageViewer";
 import usePath from "./hooks/usePath";
 import { getWork } from "./data/works";
 import { SHOW_FEEDBACK } from "./config/site";
 
 export default function App() {
   const path = usePath();
-  const slug = path.startsWith("/work/") ? path.slice("/work/".length) : null;
+  // /work/<name> -> project page,  /work/<name>/<n> -> image viewer
+  const parts = path.startsWith("/work/") ? path.slice("/work/".length).split("/") : null;
 
   // Runs on first load and on every route change (link click, Back, Forward).
   // Back/Forward/refresh -> saved scroll position. "/#section" -> that section. Otherwise -> top.
@@ -32,10 +34,16 @@ export default function App() {
 
   return (
     <>
-      <Navbar key={slug ? "project" : "home"} home={!slug} />
+      <Navbar key={parts ? "project" : "home"} home={!parts} />
       <main>
-        {slug ? (
-          <ProjectPage work={getWork(slug)} />
+        {parts ? (
+          parts.length === 1 ? (
+            <ProjectPage work={getWork(parts[0])} />
+          ) : parts.length === 2 ? (
+            <ImageViewer work={getWork(parts[0])} index={Number(parts[1])} />
+          ) : (
+            <ProjectPage work={null} />
+          )
         ) : (
           <>
             <Hero />

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { SITE } from "../config/site";
+import { WORKS } from "../data/works";
 import Link from "./Link";
 import Reveal from "./Reveal";
 
@@ -27,15 +28,19 @@ export default function ProjectPage({ work }) {
           <header className="pj__head">
             <p className="eyebrow">404</p>
             <h1>Project not found</h1>
-            <p className="sub2">
-              This project doesn't exist. Head back to the portfolio to see
-              what's available.
-            </p>
+            <p className="sub2">This project doesn't exist. Head back to the portfolio to see what's available.</p>
           </header>
         </div>
       </section>
     );
   }
+
+  const shots = work.screenshots ?? [];
+  const features = work.features ?? [];
+  const tech = work.technologies ?? [];
+  const at = WORKS.findIndex((w) => w.id === work.id);
+  const next = WORKS.length > 1 ? WORKS[(at + 1) % WORKS.length] : null;
+  const prev = WORKS.length > 2 ? WORKS[(at - 1 + WORKS.length) % WORKS.length] : null;
 
   return (
     <section className="sec pj">
@@ -47,49 +52,77 @@ export default function ProjectPage({ work }) {
           <h1>{work.title}</h1>
           <div className="pj__meta">
             <span className="tag">{work.type}</span>
-            {work.placeholder && (
-              <span className="tag">Placeholder — replace</span>
-            )}
+            {work.status && <span className="tag">{work.status}</span>}
+            {work.placeholder && <span className="tag">Placeholder — replace</span>}
           </div>
         </Reveal>
 
-        <Reveal className="pj__body">
+        <Reveal className={`pj__body${tech.length ? "" : " pj__body--solo"}`}>
           <div>
             <h2 className="pj__h">Overview</h2>
             <p>{work.overview}</p>
-            <h2 className="pj__h pj__h--gap">Features</h2>
-            <ul className="pj__list">
-              {work.features.map((f) => (
-                <li key={f}>{f}</li>
-              ))}
-            </ul>
+            {features.length > 0 && (
+              <>
+                <h2 className="pj__h pj__h--gap">What's included</h2>
+                <ul className="pj__list">
+                  {features.map((f) => (
+                    <li key={f}>{f}</li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
-          <aside className="pj__side">
-            <h2 className="pj__h">Technologies</h2>
-            <div className="pts">
-              {work.technologies.map((t) => (
-                <span key={t}>{t}</span>
-              ))}
-            </div>
-          </aside>
+          {tech.length > 0 && (
+            <aside className="pj__side">
+              <h2 className="pj__h">Technologies</h2>
+              <div className="pts">
+                {tech.map((t) => (
+                  <span key={t}>{t}</span>
+                ))}
+              </div>
+            </aside>
+          )}
         </Reveal>
 
-        {work.screenshots.length > 0 && (
-          <Reveal as="section" className="pj__shots" aria-label="Screenshots">
-            <h2 className="pj__h">Screenshots</h2>
-            <div className="shots">
-              {work.screenshots.map((src, i) => (
-                <figure key={`${src}-${i}`}>
-                  <img
-                    src={src}
-                    alt={`${work.title} screenshot ${i + 1}`}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </figure>
-              ))}
-            </div>
-          </Reveal>
+        <Reveal as="section" className="pj__shots" aria-label="Gallery">
+          <h2 className="pj__h">Gallery</h2>
+          {shots.length > 0 ? (
+            <>
+              <p className="pj__hint">Click any image to view it larger.</p>
+              <div className="shots">
+                {shots.map((src, i) => (
+                  <figure key={`${src}-${i}`}>
+                    <Link href={`/work/${work.slug}/${i + 1}`} aria-label={`View ${work.title} image ${i + 1} of ${shots.length}`}>
+                      <img src={src} alt={`${work.title} — image ${i + 1}`} loading="lazy" decoding="async" />
+                    </Link>
+                  </figure>
+                ))}
+              </div>
+            </>
+          ) : (
+            <p className="pj__hint">Designs for this project will be added here soon.</p>
+          )}
+        </Reveal>
+
+        {next && (
+          <nav className="pj__pn" aria-label="More projects">
+            {prev ? (
+              <Link href={`/work/${prev.slug}`} className="pj__pna">
+                <small>
+                  <ArrowLeft aria-hidden="true" /> Previous project
+                </small>
+                <strong>{prev.title}</strong>
+              </Link>
+            ) : (
+              <span />
+            )}
+            <Link href={`/work/${next.slug}`} className="pj__pna pj__pna--next">
+              <small>
+                Next project <ArrowRight aria-hidden="true" />
+              </small>
+              <strong>{next.title}</strong>
+            </Link>
+          </nav>
         )}
 
         <div className="pj__cta">

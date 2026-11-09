@@ -11,48 +11,65 @@ Everything you normally change lives in four files. You never need to touch the 
 
 ---
 
-## 1. Add a project
+## 1. How the project pages work
+
+Every project uses the same pages. Only the data in `src/data/works.js` differs:
+
+| Click | URL | Shows |
+|---|---|---|
+| Homepage card → **View Project** | `/work/urban-pulse` | overview, what's included, gallery |
+| Any gallery image | `/work/morrow-coffee/3` | that image large, Previous / Next, thumbnails |
+| **Next project / Previous project** | `/work/<other-project>` | the next project's page |
+
+In the image viewer: `←` / `→` keys or swipe to browse, `Esc` goes back to the project. Every page has its own URL, so links, refresh and the Back button all work.
+
+## 2. Add or replace a project's images
 
 1. Make a folder named after the project: `public/projects/my-project/`
 2. Put the images in it:
-   - `cover.webp` — homepage card image, about 1600×1000
-   - `01.webp`, `02.webp`, … — gallery images, any size (they are never cropped)
+   - a card image for the homepage (any shape; posters, logos and packaging are never cropped)
+   - the gallery images, `01.webp`, `02.webp`, … in the order you want them shown
    - `.webp` is best, under 300 KB each. `.png` and `.jpg` also work.
-3. Open `src/data/works.js`, copy the template from the top comment into the `WORKS` array, remove the `//` marks and fill it with **real** details. Paths never include `public`:
+3. In `src/data/works.js`, point to them. Paths never include `public`:
 
 ```js
-export const WORKS = [
-  {
-    id: 1,
-    slug: "my-project",              // page URL: /work/my-project
-    kind: "personal",                // "personal" or "client"
-    title: "My Project",
-    category: "Website Development",
-    type: "Personal Project",        // "Client Project" for client work
-    shortDescription: "One or two sentences.",
-    overview: "A short paragraph about what you built.",
-    technologies: ["React", "Vite"],
-    features: ["A real feature", "Another real feature"],
-    image: "/projects/my-project/cover.webp",
-    screenshots: ["/projects/my-project/01.webp", "/projects/my-project/02.webp"],
-  },
-];
+{
+  id: 6,                              // unique number
+  slug: "my-project",                 // URL: /work/my-project
+  kind: "personal",                   // "personal" or "client"
+  status: "Completed",                // optional label
+  title: "My Project",
+  category: "Graphic Design & Advertising",
+  type: "Personal Project",           // "Client Project" for client work
+  shortDescription: "One or two sentences.",
+  overview: "A short paragraph or creative brief.",
+  features: ["1 poster"],             // optional, shown as "What's included"
+  technologies: ["Photoshop"],        // optional, the box is hidden if you leave it out
+  image: "/projects/my-project/cover.webp",   // optional
+  screenshots: [                              // optional, each gets its own /work/my-project/<n> page
+    "/projects/my-project/01.webp",
+    "/projects/my-project/02.webp",
+  ],
+},
 ```
 
-Add more projects as more objects in the same array, each with a new `id` and a new `slug`.
+Required: `id`, `slug`, `kind`, `title`, `category`, `type`, `overview`. Everything else is optional.
 
-While `WORKS` is empty (`[]`), the Work section and the "Work" menu link are hidden automatically. They appear as soon as you add the first project.
+- **No `image`:** the homepage card shows the status (for example "Upcoming") instead of a picture.
+- **No `screenshots`:** the project page says designs will be added soon, and there are no image pages.
 
-**Preview before you have images:** use `"/projects/placeholder.svg"` for `image` and `screenshots`, check the layout, then swap in the real files.
+**Upcoming project becomes real:** add its images to `public/projects/<slug>/`, add `image` and `screenshots` to its entry, and change `status`. Nothing else changes.
 
-## 2. Edit, hide or remove a project
+**The images that ship with the site are placeholders** (`urban-pulse/poster.webp` and `morrow-coffee/cover.webp`, `01.webp`–`05.webp`). Replace each file with your real design **using the same file name**, and nothing in the code needs editing. If your real files have other names or formats (`.png`, `.jpg`), update the paths in `works.js`.
+
+## 3. Edit, hide or remove a project
 
 - **Edit:** change its text or image paths in `works.js`.
-- **Hide temporarily:** put `//` in front of every line of that project's block. Select the block and press `Ctrl + /` in VS Code.
+- **Hide temporarily:** put `//` in front of every line of that project's block (select it and press `Ctrl + /` in VS Code).
 - **Remove:** delete the block. Its images can stay or go.
-- **Rename a URL:** change `slug`. The old URL will then show "Project not found".
+- **Rename a URL:** change `slug`. The old URL then shows "Project not found".
 
-## 3. Client projects vs personal projects
+## 4. Client projects vs personal projects
 
 `kind` decides the group on the homepage:
 
@@ -61,7 +78,7 @@ While `WORKS` is empty (`[]`), the Work section and the "Work" menu link are hid
 
 A group with no projects is not shown. Only add a client project for real client work, and only name or show a client if they agreed to it.
 
-## 4. Add client feedback
+## 5. Add client feedback
 
 1. In `src/data/feedback.js` add real testimonials, in the client's own words and with their permission. Do not include `sample: true`:
 
@@ -75,7 +92,7 @@ export const FEEDBACK = [
 
 The Feedback section and its menu link then appear. Keep it `false` until you have real entries.
 
-## 5. Change contact details, social links, reply time
+## 6. Change contact details, social links, reply time
 
 All in `src/config/site.js`:
 
@@ -94,7 +111,7 @@ They then appear in the footer.
 
 The form's destination is `FORM_ENDPOINT` in the same file. The privacy line under the form ("We only use your details to reply to your enquiry") is in `src/components/Contact.jsx`. Keep it true for how you actually handle enquiries.
 
-## 6. Run and check the site
+## 7. Run and check the site
 
 ```bash
 npm run dev       # live preview while you edit, usually http://localhost:5173
@@ -104,7 +121,7 @@ npm run preview   # opens the built site, closest to what visitors see
 
 Quick check after any change: open a project page, refresh it, press Back, and look at the homepage at phone width (browser DevTools → device toolbar).
 
-## 7. Deploy and update
+## 8. Deploy and update
 
 You deploy one site only. Projects are pages inside it (`/work/<slug>`), so there is nothing else to host.
 
@@ -124,7 +141,7 @@ You deploy one site only. Projects are pages inside it (`/work/<slug>`), so ther
 
 Both files are included, so you don't need to do anything unless you move to another host. A different host needs the same rule configured in its own way.
 
-## 8. Fixing common problems
+## 9. Fixing common problems
 
 | Problem | Fix |
 |---|---|
@@ -132,6 +149,8 @@ Both files are included, so you don't need to do anything unless you move to ano
 | Project doesn't appear | Check it is inside the `WORKS` array, has no `//` in front, and has a `kind` of `"personal"` or `"client"`. |
 | "Work" is missing from the menu | `WORKS` is empty. It appears once there is a project. |
 | Project page says "Project not found" | The URL doesn't match a `slug` in `works.js`. |
+| "Image not found" | The number in `/work/<slug>/<n>` is bigger than the number of `screenshots`, or the project has none. |
+| The overview still says REPLACE | Write your own creative brief in that project's `overview`. |
 | Old image still shows after replacing it | Hard refresh (`Ctrl + Shift + R`). The browser cached it. |
 | Wrong or missing preview when sharing the link | Previews use `og:image` in `index.html`, which points to `https://elora-studioo.vercel.app/banner.webp`. If you move to a custom domain, change that address to the new one. Some apps (WhatsApp, LinkedIn) keep an old preview for a while. |
 | Blank white page after an edit | Open the browser console (`F12`). It names the file and line. A missing comma or bracket in `works.js` is the usual cause. |

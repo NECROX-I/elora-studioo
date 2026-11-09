@@ -49,17 +49,17 @@ export default function Work() {
                           tabIndex={-1}
                           aria-hidden="true"
                         >
-                          <img
-                            src={w.image}
-                            alt=""
-                            loading="lazy"
-                            decoding="async"
-                          />
+                          {w.image ? (
+                            <img src={w.image} alt="" loading="lazy" decoding="async" />
+                          ) : (
+                            <span className="proj__ph">{w.status || "Coming soon"}</span>
+                          )}
                         </Link>
                         <div className="proj__b">
                           <div className="proj__meta">
                             <span className="proj__cat">{w.category}</span>
                             <span className="tag">{w.type}</span>
+                            {w.status && <span className="tag">{w.status}</span>}
                           </div>
                           <h3>{w.title}</h3>
                           <p>{w.shortDescription}</p>

@@ -1258,8 +1258,8 @@ h2 {
 .proj__img img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: top center;
+    object-fit: contain;
+    object-position: center;
     transition: transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1);
 }
 .proj__meta {
@@ -1584,4 +1584,201 @@ h2 {
     font-size: 0.78rem;
     color: var(--mu);
     text-align: center;
+}
+
+
+/* ===== Projects: status card, clickable gallery, pager, image viewer ===== */
+.proj__ph {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background:
+        radial-gradient(circle at 30% 20%, rgba(107, 47, 179, 0.35), transparent 60%),
+        radial-gradient(circle at 80% 90%, rgba(217, 169, 90, 0.18), transparent 55%), #0d0d12;
+}
+.pj__body--solo {
+    grid-template-columns: 1fr;
+    max-width: 760px;
+}
+.pj__hint {
+    margin: 0 0 20px;
+    color: var(--mu);
+    font-size: 0.9rem;
+}
+.shots a {
+    display: block;
+}
+.shots figure {
+    transition: border-color 0.3s;
+}
+.shots img {
+    transition: transform 0.5s;
+}
+@media (hover: hover) {
+    .shots a {
+        cursor: zoom-in;
+    }
+    .shots figure:hover {
+        border-color: var(--gold);
+    }
+    .shots figure:hover img {
+        transform: scale(1.02);
+    }
+    .pj__pna:hover {
+        border-color: var(--gold);
+    }
+}
+/* Desktop gallery: cap image width so a single poster is not huge */
+@media (min-width: 961px) {
+    .shots {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 640px));
+        justify-content: center;
+    }
+}
+/* Previous / next project */
+.pj__pn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 64px;
+}
+.pj__pn + .pj__cta {
+    margin-top: 40px;
+}
+.pj__pna {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 20px 22px;
+    background: var(--sf);
+    border: 1px solid var(--bd);
+    border-radius: 14px;
+    transition: border-color 0.3s;
+}
+.pj__pna--next {
+    align-items: flex-end;
+    text-align: right;
+}
+.pj__pna small {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+.pj__pna small svg {
+    width: 14px;
+    height: 14px;
+}
+.pj__pna strong {
+    font: 600 1.1rem var(--serif);
+    color: var(--tx);
+}
+/* Image viewer: /work/<project>/<n> */
+.vw__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 16px;
+}
+.vw__cnt {
+    margin: 0;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    color: var(--mu);
+}
+.vw__stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0;
+    padding: 16px;
+    background: var(--sf);
+    border: 1px solid var(--bd);
+    border-radius: 14px;
+    touch-action: pan-y;
+}
+.vw__stage img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: max(280px, calc(100vh - 320px));
+}
+.vw__nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+.vw__nav .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.vw__nav .btn svg {
+    width: 16px;
+    height: 16px;
+}
+.vw__thumbs {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 2px 0 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.vw__thumbs::-webkit-scrollbar {
+    display: none;
+}
+.vw__thumbs a {
+    flex: 0 0 72px;
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #0d0d12;
+    border: 1px solid var(--bd);
+    border-radius: 8px;
+    opacity: 0.55;
+    transition:
+        opacity 0.2s,
+        border-color 0.2s;
+}
+.vw__thumbs a:hover,
+.vw__thumbs a.on {
+    opacity: 1;
+}
+.vw__thumbs a.on {
+    border-color: var(--gold);
+}
+.vw__thumbs img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+@media (max-width: 960px) {
+    .pj__pn {
+        grid-template-columns: 1fr;
+        margin-top: 40px;
+    }
+    .pj__pna--next {
+        align-items: flex-start;
+        text-align: left;
+    }
+    .vw__stage {
+        padding: 10px;
+    }
+    .vw__nav .btn {
+        flex: 1;
+        justify-content: center;
+    }
 }
