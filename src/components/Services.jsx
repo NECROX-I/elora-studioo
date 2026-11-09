@@ -5,6 +5,7 @@ import {
   Bot,
   MonitorCog,
   BriefcaseBusiness,
+  Sparkles,
 } from "lucide-react";
 import { SERVICES } from "../data/services";
 import Reveal from "./Reveal";
@@ -43,7 +44,7 @@ export default function Services() {
           <Reveal as="article" className="card cta">
             <h3>Not sure what you need?</h3>
             <p>Tell us the goal. We'll suggest the simplest route to it.</p>
-            <a href="#contact" className="btn sm">
+            <a href="#contact" className="btn md">
               Talk to Us
             </a>
           </Reveal>

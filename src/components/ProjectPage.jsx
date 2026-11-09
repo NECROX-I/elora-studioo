@@ -53,7 +53,6 @@ export default function ProjectPage({ work }) {
           <div className="pj__meta">
             <span className="tag">{work.type}</span>
             {work.status && <span className="tag">{work.status}</span>}
-            {work.placeholder && <span className="tag">Placeholder — replace</span>}
           </div>
         </Reveal>
 

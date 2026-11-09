@@ -21,7 +21,7 @@ export const WORKS = [
   {
     id: 1,
     slug: "urban-pulse",
-    kind: "client",
+    kind: "personal",
     status: "Completed",
     title: "Urban Pulse",
     category: "Graphic Design & Advertising",
