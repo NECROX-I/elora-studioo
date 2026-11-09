@@ -3,6 +3,7 @@ import {
   Globe,
   Megaphone,
   Bot,
+  MonitorCog,
   BriefcaseBusiness,
 } from "lucide-react";
 import { SERVICES } from "../data/services";
@@ -10,18 +11,11 @@ import Reveal from "./Reveal";
 import SectionHead from "./SectionHead";
 const ICONS = {
   Palette,
-  Clapperboard,
-  Presentation,
-  FileSpreadsheet,
   Globe,
-  PanelsTopLeft,
   Megaphone,
-  PenTool,
   Bot,
-  ShoppingCart,
   BriefcaseBusiness,
   MonitorCog,
-  Sparkles,
 };
 export default function Services() {
   return (

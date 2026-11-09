@@ -21,6 +21,12 @@ export default function Navbar({ home = true }) {
       window.removeEventListener("keydown", onKey);
     };
   }, []);
+  // If the window grows past the mobile menu breakpoint (rotate / resize), close the menu and unlock scrolling.
+  useEffect(() => {
+    const onResize = () => window.innerWidth > 960 && setOpen(false);
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);

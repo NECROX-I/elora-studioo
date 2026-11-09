@@ -1554,7 +1554,6 @@ h2 {
     aspect-ratio: 16/9;
 }
 
-
 /* ===== Footer links & contact privacy note ===== */
 .foot__links {
     display: flex;
@@ -1586,7 +1585,6 @@ h2 {
     text-align: center;
 }
 
-
 /* ===== Projects: status card, clickable gallery, pager, image viewer ===== */
 .proj__ph {
     display: grid;
@@ -1600,8 +1598,17 @@ h2 {
     text-transform: uppercase;
     color: var(--gold);
     background:
-        radial-gradient(circle at 30% 20%, rgba(107, 47, 179, 0.35), transparent 60%),
-        radial-gradient(circle at 80% 90%, rgba(217, 169, 90, 0.18), transparent 55%), #0d0d12;
+        radial-gradient(
+            circle at 30% 20%,
+            rgba(107, 47, 179, 0.35),
+            transparent 60%
+        ),
+        radial-gradient(
+            circle at 80% 90%,
+            rgba(217, 169, 90, 0.18),
+            transparent 55%
+        ),
+        #0d0d12;
 }
 .pj__body--solo {
     grid-template-columns: 1fr;
@@ -1638,7 +1645,10 @@ h2 {
 /* Desktop gallery: cap image width so a single poster is not huge */
 @media (min-width: 961px) {
     .shots {
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 640px));
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(100%, 420px), 640px)
+        );
         justify-content: center;
     }
 }
@@ -1780,5 +1790,78 @@ h2 {
     .vw__nav .btn {
         flex: 1;
         justify-content: center;
+    }
+}
+
+/* ===== Responsive & cross-browser hardening ===== */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+a,
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+/* Older Safari has no "overflow: clip" */
+@supports not (overflow: clip) {
+    body {
+        overflow-x: hidden;
+    }
+}
+/* Safari needs the prefix for the blurred nav bar */
+.nav::before {
+    -webkit-backdrop-filter: blur(10px);
+}
+/* Long words / titles must never push the page sideways */
+.pj h1,
+.pj__list li,
+.pj__body p,
+.pj__pna strong,
+.proj__b h3,
+.proj__b p {
+    overflow-wrap: break-word;
+}
+/* Swipe rows: keep horizontal swipes inside the row (no browser back/forward gesture) */
+#work .works,
+.shots,
+.vw__thumbs {
+    overscroll-behavior-x: contain;
+}
+/* Mobile browsers: the viewport height changes with the address bar, so prefer dvh */
+.vw__stage img {
+    max-height: max(280px, calc(100dvh - 320px));
+}
+/* Menu button + full-screen menu for phones AND tablets (the desktop menu is too wide below 961px) */
+@media (max-width: 960px) {
+    #burger {
+        display: block;
+    }
+    #menu {
+        position: fixed;
+        inset: 0;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 28px;
+        padding: 88px 24px 40px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        background: rgba(10, 10, 12, 0.98);
+        transform: translateX(100%);
+        transition: transform 0.35s;
+    }
+    #menu.open {
+        transform: none;
+    }
+    /* centred when it fits, scrollable (not cut off) on short screens such as phones in landscape */
+    #menu > :first-child {
+        margin-top: auto;
+    }
+    #menu > :last-child {
+        margin-bottom: auto;
+    }
+    #menu a:not(.btn) {
+        padding: 8px;
+        font-size: 1rem;
     }
 }
