@@ -1,17 +1,9 @@
 import {
   Palette,
-  Clapperboard,
-  Presentation,
-  FileSpreadsheet,
   Globe,
-  PanelsTopLeft,
   Megaphone,
-  PenTool,
   Bot,
-  ShoppingCart,
   BriefcaseBusiness,
-  MonitorCog,
-  Sparkles,
 } from "lucide-react";
 import { SERVICES } from "../data/services";
 import Reveal from "./Reveal";
@@ -35,10 +27,7 @@ export default function Services() {
   return (
     <section className="sec alt" id="services">
       <div className="wrap">
-        <SectionHead
-          eyebrow="What We Do"
-          title="Services We Provide For You"
-        />
+        <SectionHead eyebrow="What We Do" title="Services We Provide For You" />
         <div className="grid g3">
           {SERVICES.map((s) => {
             const Icon = ICONS[s.icon] || Sparkles;
