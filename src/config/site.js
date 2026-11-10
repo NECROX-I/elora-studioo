@@ -13,9 +13,12 @@ export const SITE = {
   // { label: "LinkedIn", url: "https://www.linkedin.com/company/your-page" }
   social: [],
 };
-export const FORM_ENDPOINT = `https://formspree.io/f/mpppbkvn`;
+
+export const FORM_ENDPOINT = "/api/contact";
+
 // Set to true only after src/data/feedback.js contains real client testimonials.
 export const SHOW_FEEDBACK = false;
+
 // The Work link only appears once src/data/works.js has at least one project.
 export const NAV = [
   { id: "about", label: "About" },
